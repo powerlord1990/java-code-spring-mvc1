@@ -1,5 +1,6 @@
 package com.company.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -11,11 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Order {
-
-    public interface Views {
-        interface OrderSummary {}
-        interface OrderDetails extends OrderSummary {}
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +31,11 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
+
+    public interface Views {
+        interface OrderSummary {}
+        interface OrderDetails extends OrderSummary {}
+    }
 }

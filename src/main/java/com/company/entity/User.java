@@ -1,6 +1,5 @@
 package com.company.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -31,7 +30,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonView(Views.UserDetails.class)
-    @JsonBackReference
     private List<Order> orders;
 
     public User() {
